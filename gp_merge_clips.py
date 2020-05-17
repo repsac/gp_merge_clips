@@ -164,14 +164,6 @@ def _map_clips(path):
     return mapping
 
 
-def _intersection(str1, str2):
-    res = ''
-    for i in str1: 
-        if i in str2 and not i in res: 
-            res += i
-    return res
-
-
 def _main():
     parser = argparse.ArgumentParser()
     parser.add_argument('path', nargs='?', default=os.getcwd())
