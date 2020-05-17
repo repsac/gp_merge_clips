@@ -1,4 +1,10 @@
 # gp_merge_clips
-Script for merging split up clips from GoPro footage
+GoPro splits long recordings out to multiple files. This library is for locating movies (from a GoPro memory card) in a directory
+and determining which movies belong to a sequence and merging them into a single movie file.
 
-Script from the YouTube tutorial video found here: https://youtu.be/zb5QLDc1_Ik
+Command line usage:
+```shell
+
+# execute on a specified directory (destination defaults to $PWD)
+> python -m gp_merge_clips <path to root folder>
+```
