@@ -87,22 +87,21 @@ def _merge_clips(clips, output_dir, dryrun):
             open_file.write(text)
 
     ext = os.path.splitext(clips[0])[-1]
-    tmp_output = tempfile.mktemp(suffix=ext)
+    output = tempfile.mktemp(suffix=ext)
     command = EXE % {
         'text': tmp_text,
-        'output': tmp_output
+        'output': output
     }
 
     _print("Running: %s" % command)
-    output = os.path.join(output_dir, 
-                          "MERGED_{}".format(os.path.basename(clips[0])))
+
     if not dryrun:
         proc = Popen(command, shell=True)
         proc.communicate()
         if proc.returncode != 0:
             raise RuntimeError("Failed to process '%s'" % command)
         os.remove(tmp_text)
-        shutil.move(tmp_output, output)
+
     return {'output': output, 'command': command}
 
 
