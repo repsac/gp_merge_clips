@@ -23,6 +23,9 @@ TEST_FRAMES_2 = (10013, 20013, 30013,
 TEST_FRAMES_3 = (10010, 10011, 10012,
                  10013, 10014, 10015)
 
+# Let's ensure that a single shot doesn't mess up the logic
+TEST_FRAMES_4 = (10013, 20013, 30013)
+
 
 def _cleanup(path):
     if path is not None:
@@ -60,7 +63,12 @@ def _test_results_2(results):
 
 def _test_results_3(results):
     "Test 3"
-    assert len(results) == 0, "Collections found, there should not be any@"
+    assert len(results) == 0, "Collections found, there should not be any"
+
+
+def _test_results_4(results):
+    "Test 4"
+    assert len(results) == 1, "Single collection found"
 
 
 def _main():
@@ -69,8 +77,10 @@ def _main():
     mapping = (
         (TEST_FRAMES_1, _test_results_1),
         (TEST_FRAMES_2, _test_results_2),
-        (TEST_FRAMES_3, _test_results_3)
+        (TEST_FRAMES_3, _test_results_3),
+        (TEST_FRAMES_4, _test_results_4)
     )
+
     try:
         for frames, func in mapping:
             tmpdir = tempfile.mkdtemp()
