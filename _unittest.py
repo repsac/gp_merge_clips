@@ -87,13 +87,13 @@ def _main():
             _create_test_files(frames, tmpdir)
             results = gp_merge_clips.merge_clips(tmpdir, dryrun=True)
             func(results)
-            _cleanup(tmpdir)
             print("{} has passed".format(func.__doc__))
     except Exception:
-        _cleanup(tmpdir)
         if func is not None:
             print("ERROR: {} has failed".format(func.__doc__))
         raise
+    finally:
+        _cleanup(tmpdir)
 
     print("All tests have passed")
 
